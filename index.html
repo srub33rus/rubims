@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>РУБИМ — срубы, бани и дома из дерева во Владимире и области</title>
+<meta name="description" content="Строим срубы, бани и жилые дома из дерева с 2006 года. 340+ объектов, фиксированная смета в договоре, свой лес, выезд по 6 областям. Расчёт бесплатно за 1–2 дня.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪵</text></svg>">
+
+<!-- Rubik -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   ПАЛИТРА — тёплый уголь + кремовый + медь.
+   ============================================================ */
+:root{
+  --bg:    #15120e;
+  --bg2:   #1d1813;
+  --bg3:   #241e17;
+  --cream: #efe6d6;
+  --mut:   #9c9080;
+  --line:  rgba(239,230,214,.12);
+  --gold:  #c79a4e;
+  --gold2: #e3bd72;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Rubik",system-ui,sans-serif;
+  background:var(--bg); color:var(--cream);
+  font-size:18px; line-height:1.7; font-weight:400;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+
+/* зерно плёнки */
+body::after{
+  content:""; position:fixed; inset:0; z-index:1; pointer-events:none;
+  opacity:.05; mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+h1,h2,h3{font-weight:700;line-height:1.1;letter-spacing:-.02em}
+
+.wrap{max-width:1240px;margin:0 auto;padding:0 28px;position:relative;z-index:2}
+section{padding:120px 0;position:relative}
+
+.eyebrow{
+  display:inline-flex;align-items:center;gap:12px;
+  color:var(--gold);font-weight:600;letter-spacing:.2em;
+  text-transform:uppercase;font-size:12px;margin-bottom:20px;
+}
+.eyebrow::before{content:"";width:30px;height:1px;background:var(--gold)}
+
+.sec-title{font-size:clamp(34px,4.6vw,58px);margin-bottom:22px}
+.sec-title em{color:var(--gold);font-style:normal}
+.sec-sub{color:var(--mut);font-size:20px;max-width:620px;line-height:1.6}
+
+.watermark{
+  position:absolute;top:50px;right:28px;z-index:0;
+  font-weight:800;font-size:clamp(110px,20vw,260px);line-height:.8;
+  color:transparent;-webkit-text-stroke:1px var(--line);
+  opacity:.5;pointer-events:none;user-select:none;
+}
+
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--gold);color:#1a150e;
+  font-weight:600;font-size:15px;letter-spacing:.01em;
+  padding:16px 30px;border-radius:6px;border:0;cursor:pointer;
+  transition:background .3s,transform .3s,box-shadow .3s;
+  font-family:"Rubik",sans-serif;
+}
+.btn:hover{background:var(--gold2);transform:translateY(-3px);box-shadow:0 14px 30px rgba(199,154,78,.25)}
+.btn.ghost{background:transparent;color:var(--cream);border:1px solid var(--line)}
+.btn.ghost:hover{border-color:var(--gold);color:var(--gold);background:transparent;box-shadow:none}
+.btn:disabled{opacity:.6;cursor:not-allowed;transform:none!important;box-shadow:none!important}
+
+/* ШАПКА */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:40;
+  transition:background .4s,border-color .4s;
+  border-bottom:1px solid transparent;
+}
+header.solid{background:rgba(21,18,14,.92);backdrop-filter:blur(14px);border-bottom-color:var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:80px}
+.logo{font-weight:800;font-size:24px;letter-spacing:.02em;display:flex;align-items:center;gap:9px}
+.logo svg{flex-shrink:0}
+.logo b{color:var(--gold);font-weight:800}
+.menu{display:flex;gap:32px;align-items:center}
+.menu a{color:var(--mut);font-weight:500;font-size:14px;letter-spacing:.02em;text-transform:uppercase;position:relative;transition:color .3s;padding:6px 0}
+.menu a::after{content:"";position:absolute;left:0;bottom:0;height:1px;width:0;background:var(--gold);transition:width .35s ease}
+.menu a:hover,.menu a.active{color:var(--cream)}
+.menu a:hover::after,.menu a.active::after{width:100%}
+.tel{font-weight:600;font-size:15px;color:var(--cream)}
+.burger{display:none;background:none;border:0;font-size:26px;cursor:pointer;color:var(--cream)}
+
+/* РОУТЕР */
+.page{display:none}
+.page.active{display:block;animation:pageIn .5s cubic-bezier(.2,.7,.2,1)}
+@keyframes pageIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+/* ГЕРОЙ */
+.hero{padding:150px 0 110px;position:relative}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center}
+.hero h1{font-size:clamp(40px,6vw,76px);margin-bottom:22px}
+.hero h1 em{color:var(--gold);font-style:normal}
+.hero p{color:#d8cdbb;font-size:21px;max-width:520px;margin-bottom:32px}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+.hero-stats{display:flex;gap:0;margin-top:48px;border-top:1px solid var(--line);padding-top:28px;flex-wrap:wrap}
+.hero-stats div{padding-right:44px;margin-right:44px;border-right:1px solid var(--line)}
+.hero-stats div:last-child{border-right:0;margin-right:0;padding-right:0}
+.hero-stats b{display:block;font-size:38px;color:var(--gold);line-height:1;font-weight:700}
+.hero-stats span{color:var(--mut);font-size:13px;letter-spacing:.1em;text-transform:uppercase}
+
+/* Фото-рамка. ТЕНЬ УБРАНА */
+.photo-frame{
+  position:relative;border-radius:8px;overflow:hidden;aspect-ratio:4/3;
+  background:linear-gradient(135deg,var(--bg3),var(--bg2));
+  border:1px solid var(--line);
+}
+.photo-frame img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  z-index:2;transition:transform 1.2s ease,opacity .5s ease;
+  opacity:0;
+}
+.photo-frame.loaded img{opacity:1}
+.photo-frame.loaded:hover img{transform:scale(1.05)}
+.photo-hint{
+  position:absolute;inset:0;z-index:1;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;color:var(--mut);padding:20px;
+  flex-direction:column;gap:6px;
+}
+.photo-hint b{color:var(--gold);font-size:15px;font-weight:600;letter-spacing:.04em}
+.photo-hint small{font-size:13px;line-height:1.5;display:block}
+.photo-hint code{background:rgba(199,154,78,.12);color:var(--gold2);padding:2px 7px;border-radius:4px;font-size:12px}
+.photo-frame.loaded .photo-hint{display:none}
+
+/* ФИЛОСОФИЯ / интро */
+.intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+.intro-big{font-size:clamp(26px,3vw,40px);line-height:1.3;font-weight:600}
+.intro-big em{color:var(--gold);font-style:normal}
+.intro-side p{color:var(--mut);font-size:19px;margin-bottom:18px}
+.intro-side .sign{margin-top:26px;font-size:22px;color:var(--cream);font-weight:600}
+.intro-side .sign small{display:block;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-top:6px}
+
+/* УСЛУГИ zigzag */
+.svc{display:flex;flex-direction:column;gap:100px;margin-top:30px}
+.svc-row{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.svc-row.rev .svc-media{order:2}
+.svc-media{position:relative}
+.svc-media .idx{position:absolute;top:18px;left:20px;z-index:3;font-size:46px;color:var(--cream);line-height:1;font-weight:700;text-shadow:0 4px 20px rgba(0,0,0,.6)}
+.svc-body h3{font-size:clamp(28px,3vw,40px);margin-bottom:16px}
+.svc-body>p{color:var(--mut);font-size:19px;margin-bottom:24px;max-width:46ch}
+.svc-feat{list-style:none;display:grid;gap:13px}
+.svc-feat li{display:flex;gap:13px;align-items:flex-start;color:#d8cdbb;font-size:17px}
+.svc-feat li svg{flex-shrink:0;margin-top:5px}
+.svc-link{display:inline-flex;align-items:center;gap:10px;margin-top:28px;color:var(--gold);font-weight:600;font-size:14px;letter-spacing:.08em;text-transform:uppercase;transition:gap .3s,color .3s}
+.svc-link:hover{gap:16px;color:var(--gold2)}
+
+/* ====== СЕТКА 4 РАБОТ НА ГЛАВНОЙ ====== */
+.works-grid{
+  margin-top:46px;
+  display:grid;grid-template-columns:1fr 1fr;gap:18px;
+}
+.works-grid figure{
+  position:relative;border-radius:8px;overflow:hidden;
+  aspect-ratio:4/3;background:linear-gradient(135deg,var(--bg3),var(--bg2));
+}
+.works-grid img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  z-index:2;transition:transform .8s ease,opacity .5s ease;opacity:0;
+}
+.works-grid figure.loaded img{opacity:1}
+.works-grid figcaption{
+  position:absolute;left:0;right:0;bottom:0;padding:22px;
+  background:linear-gradient(transparent,rgba(10,8,5,.9));
+  color:#fff;font-size:15px;font-weight:600;z-index:3;
+}
+.works-grid figcaption small{
+  display:block;color:var(--gold2);font-size:12px;
+  letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px;font-weight:600;
+}
+.works-grid .whint{
+  position:absolute;inset:0;z-index:1;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--mut);font-size:12px;text-align:center;padding:14px;
+}
+.works-grid .whint code{color:var(--gold2)}
+.works-grid figure.loaded .whint{display:none}
+@media(hover:hover) and (pointer:fine){
+  .works-grid figure:hover img{transform:scale(1.06)}
+}
+
+/* Плашка "это не все работы" */
+.works-note{
+  margin-top:34px;display:flex;align-items:center;gap:16px;
+  padding:22px 26px;border:1px dashed var(--line);border-radius:10px;
+  background:rgba(199,154,78,.04);
+}
+.works-note .ico{
+  flex-shrink:0;width:42px;height:42px;border-radius:50%;
+  background:rgba(199,154,78,.12);border:1px solid var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--gold);font-weight:700;font-size:18px;
+}
+.works-note p{color:var(--mut);font-size:16px;line-height:1.5}
+.works-note p b{color:var(--cream);font-weight:600}
+.works-note p a{color:var(--gold);font-weight:600;border-bottom:1px solid transparent;transition:border-color .3s}
+.works-note p a:hover{border-bottom-color:var(--gold)}
+
+/* ПОЧЕМУ */
+.why-list{margin-top:46px;border-top:1px solid var(--line)}
+.why-row{display:grid;grid-template-columns:80px 1fr 1.2fr;gap:36px;align-items:start;padding:36px 0;border-bottom:1px solid var(--line);transition:background .4s,padding .4s}
+.why-row:hover{background:var(--bg2);padding-left:18px;padding-right:18px}
+.why-row .n{font-size:34px;color:var(--gold);line-height:1;font-weight:700}
+.why-row h3{font-size:26px;margin-bottom:8px}
+.why-row p{color:var(--mut);font-size:18px}
+
+/* ПРОЦЕСС */
+.proc{margin-top:54px;display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative}
+.proc::before{content:"";position:absolute;top:32px;left:6%;right:6%;height:1px;background:var(--line)}
+.proc-step{position:relative;padding:0 16px;text-align:center}
+.proc-step .dot{width:64px;height:64px;border-radius:50%;background:var(--bg);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-size:24px;color:var(--gold);font-weight:700;position:relative;z-index:2;transition:border-color .4s,transform .4s,background .4s,color .4s}
+.proc-step:hover .dot{border-color:var(--gold);transform:scale(1.1);background:var(--gold);color:#1a150e}
+.proc-step h3{font-size:21px;margin-bottom:8px}
+.proc-step p{color:var(--mut);font-size:15px;line-height:1.55}
+
+/* CTA полоса */
+.cta{position:relative;border-radius:8px;overflow:hidden;margin-top:20px;background:linear-gradient(135deg,var(--bg3),var(--bg2))}
+.cta-bg{position:absolute;inset:0;z-index:0}
+.cta-bg img{width:100%;height:100%;object-fit:cover}
+.cta-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(21,18,14,.95),rgba(21,18,14,.72))}
+.cta-in{position:relative;z-index:2;padding:70px 60px;display:flex;justify-content:space-between;align-items:center;gap:36px;flex-wrap:wrap}
+.cta-in h3{font-size:clamp(30px,3.6vw,46px);margin-bottom:10px}
+.cta-in p{color:#d8cdbb;font-size:19px;max-width:48ch}
+.cta-acts{display:flex;gap:14px;flex-wrap:wrap}
+
+/* ГЕОГРАФИЯ */
+.geo-list{margin-top:46px;border-top:1px solid var(--line)}
+.geo-row{display:flex;justify-content:space-between;align-items:center;padding:26px 0;border-bottom:1px solid var(--line);transition:padding .4s}
+.geo-row:hover{padding-left:16px}
+.geo-row .reg{font-size:26px;font-weight:600;transition:color .4s}
+.geo-row:hover .reg{color:var(--gold)}
+.geo-row .km{color:var(--mut);font-size:15px;letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+.geo-note{margin-top:28px;color:var(--mut);font-size:18px;max-width:640px}
+
+/* FAQ */
+.faq{max-width:880px;margin:46px auto 0}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;padding:30px 6px;font-size:clamp(22px,2.4vw,28px);font-weight:600;display:flex;justify-content:space-between;align-items:center;gap:20px;transition:color .3s}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:hover{color:var(--gold)}
+.faq summary .pl{flex-shrink:0;width:32px;height:32px;border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:20px;transition:transform .4s,background .4s,color .4s,border-color .4s}
+.faq details[open] summary .pl{transform:rotate(45deg);background:var(--gold);color:#1a150e;border-color:var(--gold)}
+.faq .ans{padding:0 6px 32px;color:var(--mut);font-size:19px;max-width:70ch;animation:fadeDown .4s ease}
+.faq .ans b{color:var(--cream);font-weight:600}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
+
+/* КОНТАКТЫ */
+.ct-grid{margin-top:46px;display:grid;grid-template-columns:1.1fr .9fr;gap:70px;align-items:start}
+form label{display:block;color:var(--gold);font-size:12px;margin:20px 0 8px;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+form input,form select,form textarea{
+  width:100%;background:transparent;border:0;border-bottom:1px solid var(--line);
+  padding:13px 2px;color:var(--cream);font-size:19px;font-family:"Rubik";
+  transition:border-color .3s;
+}
+form select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' fill='none'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%23c79a4e' stroke-width='1.5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 4px center}
+form option{background:var(--bg2);color:var(--cream)}
+form input:focus,form select:focus,form textarea:focus{outline:0;border-bottom-color:var(--gold)}
+form input::placeholder,form textarea::placeholder{color:#5f574c}
+form textarea{resize:vertical;min-height:90px}
+.form-status{margin-top:14px;font-size:14px;min-height:20px}
+.form-status.ok{color:#8fbf6a}
+.form-status.err{color:#d47a6a}
+.ct-info h3{font-size:clamp(28px,3vw,40px);margin-bottom:16px}
+.ct-info>p{color:var(--mut);font-size:19px;margin-bottom:32px}
+.ct-line{display:flex;align-items:center;gap:16px;padding:22px 0;border-top:1px solid var(--line)}
+.ct-line b{font-size:26px;font-weight:600}
+.ct-line small{color:var(--mut);display:block;font-size:14px;letter-spacing:.04em}
+
+footer{border-top:1px solid var(--line);padding:42px 0;position:relative;z-index:2}
+.foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px;color:var(--mut);font-size:14px}
+.foot .logo{font-size:20px}
+
+.toast{position:fixed;left:50%;bottom:30px;transform:translate(-50%,160%);background:var(--bg3);color:var(--cream);padding:17px 24px;border-radius:8px;font-size:15px;font-weight:500;box-shadow:0 30px 80px rgba(0,0,0,.5);z-index:99;max-width:92vw;border:1px solid var(--gold);transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.toast.show{transform:translate(-50%,0)}
+.toast.success{border-color:#8fbf6a}
+.toast.error{border-color:#d47a6a}
+
+/* REVEAL */
+[data-reveal]{opacity:0;transform:translateY(30px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+[data-reveal].in{opacity:1;transform:none}
+.svc-row:nth-child(2),.why-row:nth-child(2),.proc-step:nth-child(2),.geo-row:nth-child(2),.works-grid figure:nth-child(2){transition-delay:.07s}
+.svc-row:nth-child(3),.why-row:nth-child(3),.proc-step:nth-child(3),.geo-row:nth-child(3),.works-grid figure:nth-child(3){transition-delay:.14s}
+.why-row:nth-child(4),.proc-step:nth-child(4),.geo-row:nth-child(4),.works-grid figure:nth-child(4){transition-delay:.21s}
+.proc-step:nth-child(5),.geo-row:nth-child(5){transition-delay:.28s}
+.geo-row:nth-child(6){transition-delay:.35s}
+
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}[data-reveal]{opacity:1;transform:none}}
+
+/* АДАПТИВ */
+@media(max-width:980px){
+  section{padding:84px 0}
+  .hero{padding:120px 0 80px}
+  .hero-grid,.intro-grid,.svc-row,.ct-grid{grid-template-columns:1fr;gap:38px}
+  .svc-row.rev .svc-media{order:0}
+  .why-row{grid-template-columns:56px 1fr;gap:22px}
+  .why-row p{grid-column:1/-1}
+  .proc{grid-template-columns:1fr 1fr;gap:36px 18px}
+  .proc::before{display:none}
+  .works-grid{grid-template-columns:1fr 1fr;gap:14px}
+  .hero-stats div{padding-right:28px;margin-right:28px}
+  .hero-stats b{font-size:32px}
+  .cta-in{padding:46px 32px}
+  .menu{display:none;position:fixed;top:0;right:0;bottom:0;width:min(82vw,340px);background:var(--bg2);flex-direction:column;justify-content:center;align-items:flex-start;padding:40px;gap:24px;border-left:1px solid var(--line);z-index:50}
+  .menu.open{display:flex}
+  .menu a{font-size:17px}
+  .burger{display:block;z-index:60}
+  .nav .tel{display:none}
+  .watermark{font-size:110px;top:26px}
+}
+@media(max-width:560px){
+  body{font-size:16px}
+  .sec-sub,.intro-side p,.svc-body>p,.why-row p,.geo-note,.ct-info>p,.faq .ans{font-size:17px}
+  .works-grid{grid-template-columns:1fr}
+  .proc{grid-template-columns:1fr}
+  .hero-stats{gap:0}
+  .hero-stats div{padding:0 20px 0 0;margin:0 20px 0 0}
+  .cta-in{flex-direction:column;align-items:flex-start}
+  .works-note{flex-direction:column;text-align:left}
+}
+</style>
+</head>
+<body>
+
+<header id="hdr">
+  <div class="wrap nav">
+    <a href="#/home" class="logo" data-go>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 20L14 6" stroke="#c79a4e" stroke-width="2.4" stroke-linecap="round"/><path d="M13 4l7 3-3 7-7-3z" fill="#c79a4e"/></svg>
+      РУ<b>БИМ</b>
+    </a>
+    <nav class="menu" id="menu">
+      <a href="#/services" data-go>Услуги</a>
+      <a href="#/process" data-go>Процесс</a>
+      <a href="#/geo" data-go>География</a>
+      <a href="#/faq" data-go>Вопросы</a>
+      <a href="#/contacts" data-go>Контакты</a>
+    </nav>
+    <a class="tel" href="tel:+79209104881">+7 920 910-48-81</a>
+    <button class="burger" id="burger" aria-label="меню">☰</button>
+  </div>
+</header>
+
+<main id="view">
+
+<!-- ============================ ГЛАВНАЯ ============================ -->
+<div class="page active" data-page="home">
+
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div data-reveal>
+        <span class="eyebrow">Владимирская область · с 2006 года</span>
+        <h1>Срубы, бани и дома<br><em>под ключ</em></h1>
+        <p>Строим из живого дерева с 2006 года. Честная смета, фиксированная цена в договоре и сдача точно в срок.</p>
+        <div class="hero-cta">
+          <a class="btn" href="#/contacts" data-go>Рассчитать стоимость</a>
+          <a class="btn ghost" href="#/services" data-go>Наши услуги</a>
+        </div>
+        <div class="hero-stats">
+          <div><b>20+</b><span>лет опыта</span></div>
+          <div><b>340+</b><span>объектов</span></div>
+          <div><b>6</b><span>областей</span></div>
+        </div>
+      </div>
+      <div class="photo-frame" data-reveal>
+        <img src="assets/hero.jpg" alt="Сруб дома" data-fallback="assets/hero.png|assets/hero.webp">
+        <div class="photo-hint">
+          <b>Главное фото объекта</b>
+          <small>Файл: <code>assets/hero.jpg</code> или <code>.png</code> / <code>.webp</code><br>(горизонтальное, самое сочное)</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- философия -->
+  <section>
+    <span class="watermark">01</span>
+    <div class="wrap intro-grid">
+      <div class="intro-big" data-reveal>Мы строим <em>надёжные объекты</em>, которые служат десятилетиями. Без лишних слов — только работа и результат.</div>
+      <div class="intro-side" data-reveal>
+        <p>С 2006 года наша бригада рубит срубы из отборного зимнего леса на своих делянках Владимирской области. Без посредников, без случайных людей, без «оказалось дорого».</p>
+        <p>Каждый объект ведём от первого звонка до сдачи и держим вас в курсе еженедельным фотоотчётом. Цена фиксируется в договоре и не меняется в процессе.</p>
+        <div class="sign">Алексей<small>основатель · 20 лет в деле</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- услуги zigzag -->
+  <section>
+    <span class="watermark">02</span>
+    <div class="wrap">
+      <span class="eyebrow" data-reveal>Что мы строим</span>
+      <h2 class="sec-title" data-reveal>Любое деревянное <em>строительство</em></h2>
+      <div class="svc">
+        <div class="svc-row" data-reveal>
+          <div class="svc-media">
+            <div class="photo-frame"><span class="idx">01</span><img src="assets/svc-house.jpg" alt="Жилой дом из сруба" data-fallback="assets/svc-house.png|assets/svc-house.webp"><div class="photo-hint"><b>Фото услуги</b><small><code>assets/svc-house.jpg/.png/.webp</code></small></div></div>
+          </div>
+          <div class="svc-body">
+            <h3>Жилые дома</h3>
+            <p>Дома из натурального дерева — тёплые, надёжные, построенные на совесть. Делаем под ключ: от фундамента до внутренней отделки.</p>
+            <ul class="svc-feat">
+              <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8.5L6 12L14 3" stroke="#c79a4e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Проект под ваши нужды и участок</li>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8.5L6 12L14 3" stroke="#c79a4e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Фундамент, коробка, крыша</li>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8.5L6 12L14 3" stroke="#c79a4e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Утепление и внутренняя отделка</li>
+            </ul>
+            <a class="svc-link" href="#/contacts" data-go>Обсудить дом →</a>
+          </div>
+        </div>
+        <div class="svc-row rev" data-reveal>
+          <div class="svc-media">
+            <div class="photo-frame"><span class="idx">02</span><img src="assets/svc-banya.jpg" alt="Баня под ключ" data-fallback="assets/svc-banya.png|assets/svc-banya.webp"><div class="photo-hint"><b>Фото услуги</b><small><code>assets/svc-banya.jpg/.png/.webp</code></small></div></div>
+          </div>
+          <div class="svc-body">
+            <h3>Дачи и бани</h3>
+            <p>Русские бани из сосны или осины. Печи, полки, вентиляция, утепление — всё включено, чтобы можно было сразу топить.</p>
+            <ul class="svc-feat">
+              <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8.5L6 12L14 3" stroke="#c79a4e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Сруб из сосны или осины</li>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8.5L6 12L14 3" stroke="#c79a4e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Печь, полки, вентиляция</li>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8.5L6 12L14 3" stroke="#c79a4e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Утепление и пароизоляция</li>
+            </ul>
+            <a class="svc-link" href="#/contacts" data-go>Обсудить баню →</a>
+          </div>
+        </div>
+        <div class="svc-row" data-reveal>
+          <div class="svc-media">
+            <div class="photo-frame"><span class="idx">03</span><img src="assets/svc-order.jpg" alt="Сруб под заказ" data-fallback="assets/svc-order.png|assets/svc-order.webp"><div class="photo-hint"><b>Фото услуги</b><small><code>assets/svc-order.jpg/.png/.webp</code></small></div></div>
+          </div>
+          <div class="svc-body">
+            <h3>Срубы под заказ</h3>
+            <p>Беседки, гостевые дома, хозпостройки — любые деревянные конструкции по вашим размерам. Зимний лес, доставка и сборка включены.</p>
+            <ul class="svc-feat">
+              <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8.5L6 12L14 3" stroke="#c79a4e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Любая форма и планировка</li>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8.5L6 12L14 3" stroke="#c79a4e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Отборный лес зимней рубки</li>
+              <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8.5L6 12L14 3" stroke="#c79a4e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Доставка по региону включена</li>
+            </ul>
+            <a class="svc-link" href="#/contacts" data-go>Обсудить проект →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== 4 РАБОТЫ НА ГЛАВНОЙ ====== -->
+  <section style="background:var(--bg2)">
+    <span class="watermark">03</span>
+    <div class="wrap">
+      <span class="eyebrow" data-reveal>Наши работы</span>
+      <h2 class="sec-title" data-reveal>Смотрите <em>глазами</em></h2>
+      <p class="sec-sub" data-reveal>Несколько реальных объектов — от общего плана до крупного угла, чтобы вы видели качество рубки воочию.</p>
+
+      <div class="works-grid">
+        <figure data-reveal>
+          <img src="assets/work-01.jpg" alt="Жилой дом" data-fallback="assets/work-01.png|assets/work-01.webp">
+          <div class="whint"><code>work-01.jpg/.png/.webp</code></div>
+          <figcaption><small>дом</small>Жилой сруб 6×8</figcaption>
+        </figure>
+        <figure data-reveal>
+          <img src="assets/work-02.jpg" alt="Баня" data-fallback="assets/work-02.png|assets/work-02.webp">
+          <div class="whint"><code>work-02.jpg/.png/.webp</code></div>
+          <figcaption><small>баня</small>Под ключ, осина</figcaption>
+        </figure>
+        <figure data-reveal>
+          <img src="assets/work-04.jpg" alt="Угол сруба" data-fallback="assets/work-04.png|assets/work-04.webp">
+          <div class="whint"><code>work-04.jpg/.png/.webp</code></div>
+          <figcaption><small>деталь</small>Венец и угол — качество рубки</figcaption>
+        </figure>
+        <figure data-reveal>
+          <img src="assets/work-08.jpg" alt="Сруб зимой" data-fallback="assets/work-08.png|assets/work-08.webp">
+          <div class="whint"><code>work-08.jpg/.png/.webp</code></div>
+          <figcaption><small>атмосфера</small>Сруб в снегу</figcaption>
+        </figure>
+      </div>
+
+      <div class="works-note" data-reveal>
+        <div class="ico">✦</div>
+        <p>Это лишь несколько объектов из <b>более чем 340</b>, которые мы построили за 20 лет. Хотите посмотреть больше конкретных примеров — напишите нам или позвоните, покажем проекты под вашу задачу.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- почему -->
+  <section>
+    <span class="watermark">04</span>
+    <div class="wrap">
+      <span class="eyebrow" data-reveal>Почему нас выбирают</span>
+      <h2 class="sec-title" data-reveal>Репутация <em>дороже</em> рекламы</h2>
+      <div class="why-list">
+        <div class="why-row" data-reveal><div class="n">01</div><h3>Свой лес, без посредников</h3><p>Работаем с проверенными делянками Владимирской области — знаем каждое бревно откуда.</p></div>
+        <div class="why-row" data-reveal><div class="n">02</div><h3>Постоянная бригада</h3><p>Опытные плотники со стажем от 8 лет, а не случайные люди с улицы.</p></div>
+        <div class="why-row" data-reveal><div class="n">03</div><h3>Фиксированная смета</h3><p>Цена прописана в договоре. Никаких доплат и «оказалось дорого» в процессе.</p></div>
+        <div class="why-row" data-reveal><div class="n">04</div><h3>Фотоотчёт каждую неделю</h3><p>Держим вас в курсе стройки, даже если вы за 300 км от участка.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- процесс превью -->
+  <section style="background:var(--bg2)">
+    <span class="watermark">05</span>
+    <div class="wrap">
+      <span class="eyebrow" data-reveal>Как мы работаем</span>
+      <h2 class="sec-title" data-reveal>От звонка до <em>сдачи</em></h2>
+      <div class="proc">
+        <div class="proc-step" data-reveal><div class="dot">1</div><h3>Звонок</h3><p>Обсуждаем задачу и бюджет бесплатно.</p></div>
+        <div class="proc-step" data-reveal><div class="dot">2</div><h3>Смета</h3><p>Готовим расчёт за 1–2 дня.</p></div>
+        <div class="proc-step" data-reveal><div class="dot">3</div><h3>Договор</h3><p>Фиксируем сроки и цену.</p></div>
+        <div class="proc-step" data-reveal><div class="dot">4</div><h3>Стройка</h3><p>Работаем, отчитываемся еженедельно.</p></div>
+        <div class="proc-step" data-reveal><div class="dot">5</div><h3>Сдача</h3><p>Принимаете готовый объект.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="cta" data-reveal>
+        <div class="cta-bg"><img src="assets/cta.jpg" alt="" data-fallback="assets/cta.png|assets/cta.webp"></div>
+        <div class="cta-in">
+          <div><h3>Хотите узнать стоимость?</h3><p>Расчёт бесплатный, ответим в течение часа. Без обязательств.</p></div>
+          <div class="cta-acts">
+            <a class="btn" href="tel:+79209104881">Позвонить</a>
+            <a class="btn ghost" href="#/contacts" data-go>Оставить заявку</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============================ УСЛУГИ ============================ -->
+<div class="page" data-page="services">
+  <section style="padding-top:150px">
+    <span class="watermark">У</span>
+    <div class="wrap">
+      <span class="eyebrow" data-reveal>Услуги</span>
+      <h2 class="sec-title" data-reveal>Что мы <em>строим</em></h2>
+      <p class="sec-sub" data-reveal>Берёмся за любой деревянный объект и делаем под ключ — от бани до жилого дома.</p>
+      <div class="svc">
+        <div class="svc-row" data-reveal>
+          <div class="svc-media"><div class="photo-frame"><span class="idx">01</span><img src="assets/svc-house.jpg" alt="Жилой дом" data-fallback="assets/svc-house.png|assets/svc-house.webp"><div class="photo-hint"><b>Фото услуги</b><small><code>assets/svc-house.jpg/.png/.webp</code></small></div></div></div>
+          <div class="svc-body"><h3>Жилые дома</h3><p>Дома из натурального дерева — тёплые, дышащие и надёжные. Строим так, чтобы служить десятилетиями.</p><ul class="svc-feat"><li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8.5L6 12L14 3" stroke="#c79a4e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Проект под ваши нужды и участок</li><li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8.5L6 12L14 3" stroke="#c79a4e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Фундамент, коробка, крыша</li><li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8.5L6 12L14 3" stroke="#c79a4e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Утепление и внутренняя отделка</li><li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8.5L6 12L14 3" stroke="#c79a4e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Заезжай и живи</li></ul></div>
+        </div>
+        <div class="svc-row rev" data-reveal>
+          <div class="svc-media"><div class="photo-frame"><span class="idx">02</span><img src="assets/svc-banya.jpg" alt="Баня" data-fallback="assets/svc-banya.png|assets/svc-banya.webp"><div class="photo-hint"><b>Фото услуги</b><small><code>assets/svc-banya.jpg/.png/.webp</code></small></div></div></div>
+          <div class="svc-body"><h3>Дачи и бани</h3><p>Уютные дачные домики и настоящие русские бани из сруба. Место, куда хочется возвращаться за тишиной и теплом.</p><ul class="svc-feat"><li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8.5L6 12L14 3" stroke="#c79a4e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Сруб из сосны или осины</li><li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8.5L6 12L14 3" stroke="#c79a4e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Установка печи, полков, вентиляции</li><li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8.5L6 12L14 3" stroke="#c79a4e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Утепление и пароизоляция</li><li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8.5L6 12L14 3" stroke="#c79a4e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Отделка парной и комнаты отдыха</li></ul></div>
+        </div>
+        <div class="svc-row" data-reveal>
+          <div class="svc-media"><div class="photo-frame"><span class="idx">03</span><img src="assets/svc-order.jpg" alt="Сруб под заказ" data-fallback="assets/svc-order.png|assets/svc-order.webp"><div class="photo-hint"><b>Фото услуги</b><small><code>assets/svc-order.jpg/.png/.webp</code></small></div></div></div>
+          <div class="svc-body"><h3>Срубы под заказ</h3><p>Готовые срубы любых размеров: беседки, гостевые дома, хозпостройки — всё, что можно построить из дерева.</p><ul class="svc-feat"><li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8.5L6 12L14 3" stroke="#c79a4e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Любая форма и планировка</li><li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8.5L6 12L14 3" stroke="#c79a4e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Отборный лес зимней рубки</li><li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8.5L6 12L14 3" stroke="#c79a4e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Доставка по региону включена</li><li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8.5L6 12L14 3" stroke="#c79a4e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Сборка бригадой на участке</li></ul></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section style="background:var(--bg2);padding-top:80px;padding-bottom:80px">
+    <div class="wrap"><div class="cta" data-reveal><div class="cta-bg"><img src="assets/cta.jpg" alt="" data-fallback="assets/cta.png|assets/cta.webp"></div><div class="cta-in"><div><h3>Обсудим ваш объект?</h3><p>Скиньте размеры и пожелания — посчитаем бесплатно за 1–2 дня.</p></div><div class="cta-acts"><a class="btn" href="#/contacts" data-go>Оставить заявку</a><a class="btn ghost" href="tel:+79209104881">Позвонить</a></div></div></div></div>
+  </section>
+</div>
+
+<!-- ============================ ПРОЦЕСС ============================ -->
+<div class="page" data-page="process">
+  <section style="padding-top:150px">
+    <span class="watermark">П</span>
+    <div class="wrap">
+      <span class="eyebrow" data-reveal>Как мы работаем</span>
+      <h2 class="sec-title" data-reveal>От звонка до <em>сдачи</em></h2>
+      <p class="sec-sub" data-reveal>Понятные шаги без сюрпризов. Каждый этап зафиксирован в договоре, стройку вы видите по фотоотчёту каждую неделю.</p>
+      <div class="why-list" style="margin-top:54px">
+        <div class="why-row" data-reveal><div class="n">1</div><h3>Звонок или заявка</h3><p>Обсуждаем задачу, участок, бюджет и сроки — бесплатно, без обязательств. Отвечаем в течение часа.</p></div>
+        <div class="why-row" data-reveal><div class="n">2</div><h3>Смета и проект</h3><p>Готовим детальный расчёт за 1–2 дня: состав работ, материалы, логистика. Показываем, из чего складывается итог.</p></div>
+        <div class="why-row" data-reveal><div class="n">3</div><h3>Договор</h3><p>Фиксируем цену, сроки и этапы оплаты. Цена в договоре не меняется в процессе стройки.</p></div>
+        <div class="why-row" data-reveal><div class="n">4</div><h3>Заготовка и рубка леса</h3><p>Отбираем зимний лес на своих делянках, рубим и собираем сруб. Контролируем геометрию венцов на каждом этапе.</p></div>
+        <div class="why-row" data-reveal><div class="n">5</div><h3>Доставка и монтаж</h3><p>Привозим на участок и собираем бригадой на месте. Фундамент, коробка, крыша, утепление — по проекту.</p></div>
+        <div class="why-row" data-reveal><div class="n">6</div><h3>Сдача и гарантия</h3><p>Принимаете объект, подписываем акт. Даём гарантию на конструктив и рубку — если что-то по нашей вине, приезжаем и исправляем.</p></div>
+      </div>
+    </div>
+  </section>
+  <section style="background:var(--bg2);padding-top:80px;padding-bottom:80px">
+    <div class="wrap"><div class="cta" data-reveal><div class="cta-bg"><img src="assets/cta.jpg" alt="" data-fallback="assets/cta.png|assets/cta.webp"></div><div class="cta-in"><div><h3>Готовы начать?</h3><p>Расскажите, что строим — посчитаем и покажем похожие проекты.</p></div><div class="cta-acts"><a class="btn" href="#/contacts" data-go>Оставить заявку</a><a class="btn ghost" href="tel:+79209104881">Позвонить</a></div></div></div></div>
+  </section>
+</div>
+
+<!-- ============================ ГЕОГРАФИЯ ============================ -->
+<div class="page" data-page="geo">
+  <section style="padding-top:150px">
+    <span class="watermark">Г</span>
+    <div class="wrap">
+      <span class="eyebrow" data-reveal>География работ</span>
+      <h2 class="sec-title" data-reveal>Работаем по <em>6 областям</em></h2>
+      <p class="sec-sub" data-reveal>Выезжаем на объект по всем перечисленным регионам. Стоимость выезда включена в смету — отдельно на месте не берём.</p>
+      <div class="geo-list">
+        <div class="geo-row" data-reveal><span class="reg">Владимирская область</span><span class="km">основной регион</span></div>
+        <div class="geo-row" data-reveal><span class="reg">Московская область</span><span class="km">основной регион</span></div>
+        <div class="geo-row" data-reveal><span class="reg">Ивановская область</span><span class="km">~110 км</span></div>
+        <div class="geo-row" data-reveal><span class="reg">Ярославская область</span><span class="km">~220 км</span></div>
+        <div class="geo-row" data-reveal><span class="reg">Нижегородская область</span><span class="km">~240 км</span></div>
+        <div class="geo-row" data-reveal><span class="reg">Тульская область</span><span class="km">~280 км</span></div>
+      </div>
+      <p class="geo-note" data-reveal>Полное покрытие — до 300 км от Владимира. Дальше? Узнайте по телефону: в ряде случаев выезжаем и за 300 км, если объект того стоит.</p>
+    </div>
+  </section>
+  <section style="background:var(--bg2);padding-top:80px;padding-bottom:80px">
+    <div class="wrap"><div class="cta" data-reveal><div class="cta-bg"><img src="assets/cta.jpg" alt="" data-fallback="assets/cta.png|assets/cta.webp"></div><div class="cta-in"><div><h3>Ваш участок в списке?</h3><p>Скиньте адрес или район — скажем, едем ли и посчитаем логистику.</p></div><div class="cta-acts"><a class="btn" href="#/contacts" data-go>Оставить заявку</a><a class="btn ghost" href="tel:+79209104881">Позвонить</a></div></div></div></div>
+  </section>
+</div>
+
+<!-- ============================ ВОПРОСЫ ============================ -->
+<div class="page" data-page="faq">
+  <section style="padding-top:150px">
+    <span class="watermark">?</span>
+    <div class="wrap">
+      <span class="eyebrow" data-reveal>Частые вопросы</span>
+      <h2 class="sec-title" data-reveal>Отвечаем честно, <em>до звонка</em></h2>
+      <p class="sec-sub" data-reveal>То, что клиенты спрашивают чаще всего. Если вашего вопроса тут нет — звоните, ответим за минуту.</p>
+      <div class="faq">
+        <details data-reveal open><summary>Сколько времени занимает стройка?<span class="pl">+</span></summary><div class="ans">Коробка сруба собирается за <b>2–4 недели</b> в зависимости от площади. Баня или дом «под ключ» — от <b>1 до 3 месяцев</b> с учётом фундамента, крыши и утепления. Точные сроки фиксируем в договоре и не сдвигаем.</div></details>
+        <details data-reveal><summary>Можно ли сразу жить или топить бану?<span class="pl">+</span></summary><div class="ans">Свежий сруб даёт усадку — обычно <b>от полугода до года</b>, в зависимости от влажности леса. Мы рубим из зимнего леса (он меньше ведёт), но честно предупреждаем: жить и топить сразу после сборки не стоит. Рассказываем, как правильно выдержать период усадки.</div></details>
+        <details data-reveal><summary>Даёте ли гарантию на сруб?<span class="pl">+</span></summary><div class="ans">Да. Гарантия прописана в договоре и распространяется на геометрию рубки, стыки венцов и конструктив. Если через год-два что-то по нашей вине поведёт или разойдётся — приезжаем и исправляем бесплатно.</div></details>
+        <details data-reveal><summary>Работаете ли зимой?<span class="pl">+</span></summary><div class="ans">Да, и это даже плюс: <b>зимний лес</b> содержит меньше влаги, сруб из него меньше усыхает и трескается. Рубим и возим круглый год.</div></details>
+        <details data-reveal><summary>Как считается доставка и выезд?<span class="pl">+</span></summary><div class="ans">Стоимость доставки и выезда <b>включена в смету</b> — отдельно на месте не берём. Считаем по километражу от базы до участка ещё до договора.</div></details>
+        <details data-reveal><summary>Можно ли внести правки в проект?<span class="pl">+</span></summary><div class="ans">Да, но <b>до подписания договора и начала рубки</b>. Планировку, окна/двери, материал и толщину венца обсуждаем на этапе сметы. После того как лес пошёл в работу, правки — уже как доп. работа.</div></details>
+        <details data-reveal><summary>Какая предоплата?<span class="pl">+</span></summary><div class="ans">Работаем <b>поэтапно по договору</b>: часть на закупку и рубку леса, часть на монтаж, остаток — после сдачи. Никаких «100% вперёд».</div></details>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============================ КОНТАКТЫ ============================ -->
+<div class="page" data-page="contacts">
+  <section class="contact" style="padding-top:150px;background:var(--bg2)">
+    <span class="watermark">@</span>
+    <div class="wrap">
+      <span class="eyebrow" data-reveal>Контакты</span>
+      <h2 class="sec-title" data-reveal>Обсудим <em>ваш проект</em></h2>
+      <p class="sec-sub" data-reveal>Заполните форму — заявка мгновенно придёт Алексею в Telegram. Или просто позвоните, отвечаем в любое время.</p>
+      <div class="ct-grid">
+        <form id="leadForm" data-reveal novalidate>
+          <label>Ваше имя *</label>
+          <input type="text" name="name" placeholder="Как к вам обращаться" required>
+          <label>Телефон *</label>
+          <input type="tel" name="phone" placeholder="+7 ___ ___-__-__" required>
+          <label>Что строим</label>
+          <select name="type"><option>Жилой дом</option><option>Баня</option><option>Дачный домик</option><option>Беседка / терраса</option><option>Гостевой дом</option><option>Другое</option></select>
+          <label>Примерная площадь / размеры</label>
+          <input type="text" name="area" placeholder="напр. 6×8 или 40 м²">
+          <label>Комментарий</label>
+          <textarea name="msg" placeholder="Участок, сроки, пожелания — что важно"></textarea>
+          <button type="submit" class="btn" id="submitBtn" style="margin-top:28px;width:100%;justify-content:center">Отправить заявку</button>
+          <div class="form-status" id="formStatus"></div>
+        </form>
+        <div class="ct-info" data-reveal>
+          <h3>Свяжитесь напрямую</h3>
+          <p>Расчёт бесплатный, без обязательств — ответим в течение часа. Быстрее всего позвонить; если удобнее переписка — напишите в MAX.</p>
+          <div class="ct-line"><a class="btn" href="tel:+79209104881">Позвонить</a></div>
+          <div class="ct-line"><button class="btn ghost" type="button" onclick="copyNumber()">Скопировать номер для MAX</button></div>
+          <div class="ct-line"><div><b>+7 920 910-48-81</b><small>Алексей · Владимирская область</small></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span class="logo">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 20L14 6" stroke="#c79a4e" stroke-width="2.4" stroke-linecap="round"/><path d="M13 4l7 3-3 7-7-3z" fill="#c79a4e"/></svg>
+      РУ<b>БИМ</b>
+    </span>
+    <span>© 2026 · Владимирская область и 6 регионов · с 2006 года</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============================================================
+   ⚙️ TELEGRAM-БОТ — ВСЁ УЖЕ ВПИСАНО
+   Бот: @zacazibotsrub_bot
+   Получатель заявок: чат 7624632599 (@xirfe)
+   ============================================================ */
+var BOT_TOKEN = '8687054028:AAFhsB9wlx2rHcq8wi6FsVTeVIVUG-v9yds';
+var CHAT_ID   = '7624632599';
+/* ============================================================ */
+
+/* ---------- шапка уплотняется при скролле ---------- */
+var hdr = document.getElementById('hdr');
+function onScrollHdr(){ hdr.classList.toggle('solid', window.scrollY > 40); }
+window.addEventListener('scroll', onScrollHdr, {passive:true}); onScrollHdr();
+
+/* ---------- мобильное меню ---------- */
+var burger = document.getElementById('burger');
+var menu = document.getElementById('menu');
+burger.onclick = function(){ menu.classList.toggle('open'); };
+
+/* ---------- роутер по хешу ---------- */
+var pages = document.querySelectorAll('.page');
+var menuLinks = menu.querySelectorAll('a');
+function currentPage(){ var h = location.hash.replace('#/','').trim(); return h || 'home'; }
+function show(name){
+  var found = false;
+  pages.forEach(function(p){ var on = p.getAttribute('data-page')===name; p.classList.toggle('active',on); if(on) found=true; });
+  if(!found){ pages.forEach(function(p){ p.classList.toggle('active', p.getAttribute('data-page')==='home'); }); name='home'; }
+  menuLinks.forEach(function(a){ a.classList.toggle('active', a.getAttribute('href')==='#/'+name); });
+  menu.classList.remove('open');
+  window.scrollTo(0,0);
+  requestAnimationFrame(function(){
+    var act = document.querySelector('.page.active'); if(!act) return;
+    act.querySelectorAll('[data-reveal]').forEach(function(el){ if(el.getBoundingClientRect().top < window.innerHeight*0.95) el.classList.add('in'); });
+  });
+}
+window.addEventListener('hashchange', function(){ show(currentPage()); });
+document.querySelectorAll('[data-go]').forEach(function(a){
+  a.addEventListener('click', function(){ var t=a.getAttribute('href').replace('#/',''); setTimeout(function(){ if(currentPage()===t) show(t); },0); });
+});
+
+/* ---------- reveal по скроллу ---------- */
+var io = new IntersectionObserver(function(entries){
+  entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+},{threshold:0.12, rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('[data-reveal]').forEach(function(el){ io.observe(el); });
+
+/* ---------- АВТО-ПЛЕЙСХОЛДЕРЫ ДЛЯ ФОТО (jpg/png/webp) ---------- */
+function markLoaded(img){
+  var frame = img.closest('.photo-frame') || img.closest('figure') || img.parentElement;
+  if(frame) frame.classList.add('loaded');
+}
+function tryLoad(img, candidates, idx){
+  if(idx >= candidates.length){ return; }
+  var test = new Image();
+  test.onload = function(){
+    img.src = candidates[idx];
+    img.onerror = null;
+    markLoaded(img);
+  };
+  test.onerror = function(){ tryLoad(img, candidates, idx+1); };
+  test.src = candidates[idx];
+}
+document.querySelectorAll('img[data-fallback], .photo-frame img, .works-grid img').forEach(function(img){
+  var fb = img.getAttribute('data-fallback');
+  var candidates = [];
+  if(fb){ candidates = [img.getAttribute('src')].concat(fb.split('|')); }
+  else { candidates = [img.getAttribute('src')]; }
+
+  img.addEventListener('load', function(){ markLoaded(img); });
+  img.addEventListener('error', function(){
+    if(candidates.length > 1){ tryLoad(img, candidates, 1); }
+  });
+});
+
+/* ---------- тост ---------- */
+var toastEl = document.getElementById('toast'), toastTimer;
+function toast(msg, kind){
+  toastEl.textContent = msg;
+  toastEl.className = 'toast show' + (kind ? ' '+kind : '');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function(){ toastEl.classList.remove('show'); }, 5000);
+}
+
+/* ---------- копирование в буфер с fallback ---------- */
+function copyText(text, okMsg){
+  var fb = function(){
+    var ta=document.createElement('textarea'); ta.value=text; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); toast(okMsg,'success'); }
+    catch(e){ toast('Не удалось скопировать. Текст: '+text,'error'); }
+    document.body.removeChild(ta);
+  };
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(function(){ toast(okMsg,'success'); }).catch(fb);
+  } else { fb(); }
+}
+function copyNumber(){ copyText('+7 920 910-48-81','Номер скопирован — вставьте в MAX Алексею или позвоните'); }
+
+/* ---------- ОТПРАВКА ЗАЯВКИ В TELEGRAM ---------- */
+function sendToTelegram(payload){
+  var url = 'https://api.telegram.org/bot' + BOT_TOKEN + '/sendMessage';
+  return fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      chat_id: CHAT_ID,
+      text: payload,
+      parse_mode: 'HTML',
+      disable_web_page_preview: true
+    })
+  }).then(function(r){
+    if(!r.ok) throw new Error('HTTP ' + r.status);
+    return r.json();
+  });
+}
+
+// экранирование HTML для Telegram (parse_mode: HTML)
+function escapeHtml(s){
+  return String(s).replace(/[&<>]/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];
+  });
+}
+
+document.getElementById('leadForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  var form = this;
+  var btn = document.getElementById('submitBtn');
+  var status = document.getElementById('formStatus');
+
+  var f = new FormData(form);
+  var name = (f.get('name')||'').toString().trim();
+  var phone = (f.get('phone')||'').toString().trim();
+
+  // простая валидация обязательных полей
+  if(!name || !phone){
+    status.textContent = 'Заполните имя и телефон.';
+    status.className = 'form-status err';
+    return;
+  }
+
+  // формируем красивое сообщение для TG
+  var lines = [
+    '<b>🪵 Новая заявка с сайта РУБИМ</b>',
+    '',
+    '<b>Имя:</b> ' + escapeHtml(name),
+    '<b>Телефон:</b> ' + escapeHtml(phone),
+    '<b>Объект:</b> ' + escapeHtml(f.get('type')),
+    '<b>Площадь:</b> ' + escapeHtml(f.get('area') || '—'),
+    '<b>Комментарий:</b> ' + escapeHtml(f.get('msg') || '—'),
+    '',
+    '<i>' + new Date().toLocaleString('ru-RU') + '</i>'
+  ];
+  var message = lines.join('\n');
+
+  // блокируем кнопку
+  btn.disabled = true;
+  var origLabel = btn.innerHTML;
+  btn.innerHTML = 'Отправляем...';
+  status.textContent = '';
+  status.className = 'form-status';
+
+  sendToTelegram(message).then(function(data){
+    if(data && data.ok){
+      status.textContent = '✓ Заявка отправлена! Свяжемся с вами в течение часа.';
+      status.className = 'form-status ok';
+      toast('Заявка доставлена Алексею в Telegram','success');
+      form.reset();
+    } else {
+      throw new Error((data && data.description) || 'Неизвестная ошибка');
+    }
+  }).catch(function(err){
+    console.error('[TG]', err);
+    status.textContent = '✗ Не удалось отправить автоматически. Скопировали текст заявки в буфер — вставьте его Алексею в MAX или WhatsApp.';
+    status.className = 'form-status err';
+    // fallback: копируем plain-версию текста в буфер
+    var plain = message.replace(/<\/?b>|<\/?i>/g,'');
+    copyText(plain, 'Текст заявки скопирован — вставьте вручную');
+  }).finally(function(){
+    btn.disabled = false;
+    btn.innerHTML = origLabel;
+  });
+});
+
+show(currentPage());
+</script>
+</body>
+</html>
